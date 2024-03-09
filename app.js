@@ -23,7 +23,7 @@ app.use(express.json());
 // app.use('/api/v1/Login', login);
 app.get('/api/auth/Token', async (req, res) => {
   try {
-    const token = Token.findOne();
+    const token = Token.find();
     console.log(token);
     if (!token) {
       return res.status(404).json({ error: 'Token not found' });
