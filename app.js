@@ -52,7 +52,7 @@ app.get('/api/auth/newToken', async (req, res) => {
     );
     const { access_token } = ZohoRequest.data;
 
-    const exsistingToken = await Token.findOne();
+    const existingToken = await Token.findOne();
     if (!existingToken) {
       // If token doesn't exist, return an error
       return res.status(404).json({ error: 'Token not found' });
