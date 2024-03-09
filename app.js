@@ -52,6 +52,7 @@ app.get('/api/auth/newToken', async (req, res) => {
     );
     const { access_token } = ZohoRequest.data;
     console.log(access_token);
+    return res.access_token;
   } catch (error) {}
 });
 app.post('/api/auth/Token', async (req, res) => {
