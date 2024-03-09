@@ -37,42 +37,41 @@ app.get('/api/auth/Token', async (req, res) => {
 
 app.get('/api/auth/newToken', async (req, res) => {
   try {
-    const zohoData = {
-      refresh_token:
-        '1000.e571752c5d9e9b94044542621327ae38.2fc29af8ab61fe78a0ace94fb77727bf',
-      client_id: '1000.IJSUXC1199E5GTAI0GHEJE879XP8YW',
-      client_secret: '0cee3a6d8834f049675f471f2f0d284ecab590adc5',
-      scope:
-        'ZohoCRM.modules.all,Desk.tickets.ALL,Desk.contacts.ALL,ZohoSubscriptions.fullaccess.all,Desk.contacts.UPDATE',
-      grant_type: 'refresh_token',
-    };
+    // const zohoData = {
+    //   refresh_token:
+    //     '1000.e571752c5d9e9b94044542621327ae38.2fc29af8ab61fe78a0ace94fb77727bf',
+    //   client_id: '1000.IJSUXC1199E5GTAI0GHEJE879XP8YW',
+    //   client_secret: '0cee3a6d8834f049675f471f2f0d284ecab590adc5',
+    //   scope:
+    //     'ZohoCRM.modules.all,Desk.tickets.ALL,Desk.contacts.ALL,ZohoSubscriptions.fullaccess.all,Desk.contacts.UPDATE',
+    //   grant_type: 'refresh_token',
+    // };
     const ZohoRequest = await axios.post(
-      'https://accounts.zoho.in/oauth/v2/token',
-      zohoData
+      'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.e571752c5d9e9b94044542621327ae38.2fc29af8ab61fe78a0ace94fb77727bf&client_id=1000.IJSUXC1199E5GTAI0GHEJE879XP8YW&client_secret=0cee3a6d8834f049675f471f2f0d284ecab590adc5&scope=ZohoCRM.modules.all,Desk.tickets.ALL,Desk.contacts.ALL,ZohoSubscriptions.fullaccess.all,Desk.contacts.UPDATE&grant_type=refresh_token'
     );
     const { access_token } = ZohoRequest.data;
     console.log(access_token);
     return res.access_token;
   } catch (error) {}
 });
-app.post('/api/auth/Token', async (req, res) => {
-  try {
-    // Create a new Token document based on the request body
-    const newToken = new Token({
-      BearerToken: req.body.BearerToken, // Assuming the BearerToken is sent in the request body
-    });
+// app.post('/api/auth/Token', async (req, res) => {
+//   try {
+//     // Create a new Token document based on the request body
+//     const newToken = new Token({
+//       BearerToken: req.body.BearerToken, // Assuming the BearerToken is sent in the request body
+//     });
 
-    // Save the new token to the database
-    await newToken.save();
+//     // Save the new token to the database
+//     await newToken.save();
 
-    // Respond with a success message
-    return res.json({ message: 'Token saved successfully', token: newToken });
-  } catch (error) {
-    // If an error occurs, respond with an error message
-    console.error(error);
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+//     // Respond with a success message
+//     return res.json({ message: 'Token saved successfully', token: newToken });
+//   } catch (error) {
+//     // If an error occurs, respond with an error message
+//     console.error(error);
+//     return res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 //START APP
 const start = async () => {
