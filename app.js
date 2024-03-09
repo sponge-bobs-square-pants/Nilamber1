@@ -33,6 +33,25 @@ app.get('/api/auth/Token', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+app.post('/api/auth/Token', async (req, res) => {
+  try {
+    // Create a new Token document based on the request body
+    const newToken = new Token({
+      BearerToken: req.body.BearerToken, // Assuming the BearerToken is sent in the request body
+    });
+
+    // Save the new token to the database
+    await newToken.save();
+
+    // Respond with a success message
+    return res.json({ message: 'Token saved successfully', token: newToken });
+  } catch (error) {
+    // If an error occurs, respond with an error message
+    console.error(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 //START APP
 const start = async () => {
   try {
