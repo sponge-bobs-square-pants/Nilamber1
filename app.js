@@ -63,7 +63,6 @@ app.get('/api/auth/newToken', async (req, res) => {
     const FullToken = 'Zoho-oauthtoken ' + access_token;
     return res.json({ token: FullToken });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
