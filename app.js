@@ -56,14 +56,16 @@ app.get('/api/auth/newToken', async (req, res) => {
     console.log('zoho token has been called', access_token);
     const existingToken = await Token.findOne();
     if (!existingToken) {
-      // If token doesn't exist, return an error
       return res.status(404).json({ error: 'Token not found' });
     }
     existingToken.BearerToken = access_token;
     await existingToken.save();
     const FullToken = 'Zoho-oauthtoken ' + access_token;
     return res.json({ token: FullToken });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 // app.post('/api/auth/Token', async (req, res) => {
 //   try {
