@@ -77,7 +77,7 @@ app.post('/api/auth/newToken', async (req, res) => {
 app.post('/api/sendMessage', async (req, res) => {
   try {
     const { apiKey, campaignName, destination, userName, templateParams } =
-      req.headers;
+      req.body;
     console.log(apiKey, campaignName, destination, userName, templateParams);
     const response = await axios.post(
       'https://backend.api-wa.co/campaign/flexiwaba/api',
