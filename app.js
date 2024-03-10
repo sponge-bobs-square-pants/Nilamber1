@@ -37,6 +37,10 @@ app.get('/api/auth/Token', async (req, res) => {
 });
 
 app.post('/api/auth/newToken', async (req, res) => {
+  const name = req.body;
+  if (!name) {
+    return res.status(404).json({ error: 'Name not found' });
+  }
   console.log('I m getting called');
   try {
     // const zohoData = {
@@ -67,6 +71,27 @@ app.post('/api/auth/newToken', async (req, res) => {
     return res.json({ token: FullToken });
   } catch (error) {
     return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/api/sendMessage', async (req, res) => {
+  try {
+    const { apiKey, campaignName, destination, userName, templateParams } =
+      req.headers;
+    console.log(apiKey, campaignName, destination, userName, templateParams);
+    const response = await axios.post(
+      'https://backend.api-wa.co/campaign/flexiwaba/api',
+      {
+        apiKey,
+        campaignName,
+        destination,
+        userName,
+        templateParams,
+      }
+    );
+    return res.json(response.data);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 // app.post('/api/auth/Token', async (req, res) => {
