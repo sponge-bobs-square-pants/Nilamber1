@@ -37,8 +37,9 @@ app.get('/api/auth/Token', async (req, res) => {
 });
 
 app.get('/api/auth/newToken', async (req, res) => {
+  console.log('I m getting called');
   try {
-    console.log('I m getting called');
+    console.log('I m getting called1');
     // const zohoData = {
     //   refresh_token:
     //     '1000.e571752c5d9e9b94044542621327ae38.2fc29af8ab61fe78a0ace94fb77727bf',
