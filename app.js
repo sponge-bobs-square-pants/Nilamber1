@@ -51,8 +51,9 @@ app.get('/api/auth/newToken', async (req, res) => {
     const ZohoRequest = await axios.post(
       'https://accounts.zoho.in/oauth/v2/token?refresh_token=1000.188fa35ef745478a1a52062d37a453f4.7d990b72adc6daa21c24b80428896633&client_id=1000.IJSUXC1199E5GTAI0GHEJE879XP8YW&client_secret=0cee3a6d8834f049675f471f2f0d284ecab590adc5&scope=ZohoCRM.modules.all,Desk.tickets.ALL,Desk.contacts.ALL,ZohoSubscriptions.fullaccess.all,Desk.contacts.UPDATE&grant_type=refresh_token'
     );
-    const { access_token } = ZohoRequest.data;
 
+    const { access_token } = ZohoRequest.data;
+    console.log('zoho token has been called', access_token);
     const existingToken = await Token.findOne();
     if (!existingToken) {
       // If token doesn't exist, return an error
